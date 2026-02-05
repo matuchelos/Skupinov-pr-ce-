@@ -1,2 +1,5 @@
 # Skupinova prace
-webstranka
+
+copywriter 
+designer
+vývojář 
