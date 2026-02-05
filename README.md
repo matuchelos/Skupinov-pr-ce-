@@ -1,4 +1,4 @@
-# Skupinova prace danilJeStupid
+# Skupinova prace
 
 copywriter 
 designer
