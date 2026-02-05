@@ -1,2 +1,2 @@
-# Skupinov-pr-ce-
+# Skupinova prace
 webstranka
