@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Mario Bros</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-color: #ff0000;
+            padding: 40px 10px;
+            border-bottom: 6px solid #ffff00;
+        }
+
+        header h1 { font-size: 22px; color: #ffff00; text-shadow: 4px 4px #000; margin: 0; }
+
+        .play-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 25px;
+            background-color: #ffff00;
+            color: #000;
+            text-decoration: none;
+            font-size: 12px;
+            border: 4px solid #000;
+            box-shadow: 4px 4px #888800;
+        }
+        .play-button:hover { background-color: #fff; box-shadow: 2px 2px #888800; transform: translateY(2px); }
+
+        nav { 
+            background-color: #222; 
+            padding: 15px; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 2px solid #444;
+        }
+        nav a { color: #00ffff; text-decoration: none; margin: 0 10px; font-size: 10px; }
+        nav a:hover { color: #ff00ff; }
+
+        section { padding: 60px 20px; max-width: 1100px; margin: 0 auto; }
+        
+        #hrdinove h2 { color: #6fff00; }
+        #nepratele h2 { color: #ff0000; }
+        #predmety h2 { color: #ffff00; }
+
+        h2 { margin-bottom: 40px; font-size: 18px; text-transform: uppercase; }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #111;
+            border: 4px solid #6fff00; 
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); background-color: #1a1a1a; }
+
+        .card h3 { color: #6fff00; font-size: 14px; margin: 10px 0; border-bottom: 2px solid #333; padding-bottom: 10px; width: 100%; }
+        .card.enemy h3 { color: #ff0000; }
+        .card.item h3 { color: #ffff00; }
+
+        .card.enemy { border-color: #ff0000; }   
+        .card.item { border-color: #ffff00; }    
+
+        .sprite {
+            width: 50px; 
+            height: auto;
+            image-rendering: pixelated; 
+            margin-bottom: 20px;
+        }
+
+        .card p { font-size: 10px; color: #ccc; line-height: 1.8; text-align: left; margin: 0; }
+
+        footer { background: #111; padding: 30px; border-top: 4px solid #ff0000; font-size: 9px; color: #666; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>SUPER MARIO BROS. 1985</h1>
+        <a href="https://supermario-game.com/" target="_blank" class="play-button">HRÁT ONLINE</a>
+    </header>
+
+    <nav>
+        <a href="#hrdinove">HRDINOVÉ</a>
+        <a href="#nepratele">NEPŘÁTELÉ</a>
+        <a href="#predmety">PŘEDMĚTY</a>
+    </nav>
+
+    <section id="hrdinove">
+        <h2>Hlavní Hrdinové</h2>
+        <div class="game-grid">
+            <div class="card">
+                <img src="fivecon/mario1.png" alt="Mario" class="sprite">
+                <h3>Mario</h3>
+                <p>Legendární instalatér. Sbírá houby, aby vyrostl, a květiny, aby mohl střílet ohnivé koule. Jeho cílem je zachránit princeznu Peach.</p>
+            </div>
+            <div class="card">
+                <img src="fivecon/luigi1.png" alt="Luigi" class="sprite">
+                <h3>Luigi</h3>
+                <p>Mariův bratr v zeleném úboru. V prvním dobrodružství pomáhá Mariovi jako druhý hráč v kooperaci.</p>
+            </div>
+            <div class="card">
+                <img src="fivecon/Princess Peach1.png" alt="Peach" class="sprite">
+                <h3>Princess Peach</h3>
+                <p>Princezna z Mushroom Kingdom. Byla unesena Bowserem a uvězněna v jeho hradě, dokud ji Mario nezachrání.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="nepratele" style="background-color: #050505;">
+        <h2>Bowserova Armáda</h2>
+        <div class="game-grid">
+            <div class="card enemy">
+                <img src="fivecon/goomba1.png" alt="Goomba" class="sprite">
+                <h3>Goomba</h3>
+                <p>Základní pěšák, který se jen tak toulá světem. Stačí na něj skočit, abyste ho porazili, ale pozor na dotek z boku!</p>
+            </div>
+            <div class="card enemy">
+                <img src="fivecon/troopa1.png" alt="Koopa" class="sprite">
+                <h3>Koopa Troopa</h3>
+                <p>Želva v zeleném krunýři. Po skoku se schová do krunýře, který může Mario nakopnout a zničit tak další řadu nepřátel.</p>
+            </div>
+            <div class="card enemy">
+                <img src="fivecon/Bowser.png" alt="Bowser" class="sprite" style="width: 70px;">
+                <h3>Bowser</h3>
+                <p>Obávaný král Koopů. Chrlí oheň a ovládá temná kouzla. Je to poslední překážka v cestě za záchranou princezny.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="predmety">
+        <h2>Mocné Předměty</h2>
+        <div class="game-grid">
+            <div class="card item">
+                <img src="fivecon/mashroom.png" alt="Mushroom" class="sprite">
+                <h3>Super Mushroom</h3>
+                <p>Zvětší Maria na Super Maria. Umožňuje mu rozbíjet cihly a dává mu šanci přežít jeden zásah od nepřítele.</p>
+            </div>
+            <div class="card item">
+                <img src="fivecon/Fire Flower.png" alt="Fire Flower" class="sprite">
+                <h3>Fire Flower</h3>
+                <p>Promění Maria na Fire Maria. Umožňuje střílet ohnivé koule, které zlikvidují většinu nepřátel na dálku.</p>
+            </div>
+            <div class="card item">
+                <img src="fivecon/Starman.png" alt="Starman" class="sprite">
+                <h3>Starman</h3>
+                <p>Udělá Maria na krátkou chvíli nezranitelným. Mario začne blikat a může zničit jakéhokoli nepřítele pouhým dotykem.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>@SUPER MARIO BROS. 1985 | Licence patří společnosti Nintendo</p>
+    </footer>
+
+</body>
+</html>
