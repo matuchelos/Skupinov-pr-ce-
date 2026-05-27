@@ -3,51 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Character Collection - Rarity Tiers</title>
+    <title>Steal a Brainrot - Postavy</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        body { margin: 0; background: #141414; color: #fff; font-family: 'Press Start 2P', cursive; text-align: center; scroll-behavior: smooth; }
-        header { background: #333; padding: 40px 10px; border-bottom: 6px solid #555; }
-        header h1 { font-size: 20px; color: #fff; text-shadow: 3px 3px #000; margin: 0; }
+        body { margin: 0; background: #0a0a12; color: #fff; font-family: 'Press Start 2P', cursive; text-align: center; scroll-behavior: smooth; }
         
-        nav { background: #1a1a1a; padding: 15px; position: sticky; top: 0; z-index: 100; border-bottom: 2px solid #333; }
-        nav a { color: #aaa; text-decoration: none; margin: 0 15px; font-size: 10px; transition: 0.3s; }
-        nav a:hover { color: #fff; }
-
-        section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
-        h2 { margin-bottom: 40px; font-size: 22px; text-transform: uppercase; letter-spacing: 2px; }
-
-        .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        header { background: linear-gradient(180deg, #18182c 0%, #0a0a12 100%); padding: 50px 10px; border-bottom: 4px solid #ff0055; box-shadow: 0 5px 25px rgba(255, 0, 85, 0.4); }
+        .rainbow-text { font-size: 26px; font-weight: bold; text-transform: uppercase; background: linear-gradient(to right, #ff0055, #00d2ff, #b537ff, #ffb300, #ff0055); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s linear infinite; }
         
-        .card { background: #000000; padding: 20px; display: flex; flex-direction: column; align-items: center; transition: 0.4s; border: 4px solid; position: relative; overflow: hidden; }
-        .card:hover { transform: scale(1.05); z-index: 2; }
+        @keyframes shine { to { background-position: 200% center; } }
         
-        .card h3 { font-size: 12px; margin: 15px 0 5px 0; width: 100%; min-height: 30px; }
-        .card span { font-size: 8px; font-weight: bold; padding: 4px 8px; border-radius: 4px; margin-bottom: 10px; }
+        .intro-box { background: #131326; max-width: 800px; margin: 30px auto; padding: 25px; border: 3px solid #ff0055; box-shadow: 0 0 20px rgba(255, 0, 85, 0.2); border-radius: 8px; }
+        .intro-box h2 { font-size: 12px; color: #ff0055; margin-top: 0; margin-bottom: 15px; }
+        .intro-box p { font-size: 9px; line-height: 1.6; color: #00ffcc; margin-bottom: 0; }
+
+        nav { background: #0f0f1d; padding: 15px; position: sticky; top: 0; z-index: 100; border-bottom: 3px solid #333; }
+        nav a { color: #fff; text-decoration: none; margin: 0 15px; font-size: 10px; text-shadow: 0 0 5px rgba(255,255,255,0.5); transition: 0.2s; }
+        nav a:hover { color: #ff0055; text-shadow: 0 0 10px #ff0055; }
+
+        section { padding: 50px 20px; max-width: 1200px; margin: 0 auto; }
+        h2 { margin-bottom: 35px; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         
-        .character-img { width: 120px; height: 120px; object-fit: contain; margin-bottom: 10px; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 10px; }
-
+        .card { background: #111122; padding: 20px; display: flex; flex-direction: column; align-items: center; border: 4px solid; border-radius: 12px; transition: 0.3s ease-in-out; position: relative; }
+        .card:hover { transform: translateY(-10px); }
         
-        .rare-sec h2 { color: #4aa3ff; }
-        .rare { border-color: #4aa3ff; box-shadow: 0 0 10px rgba(74, 163, 255, 0.2); }
-        .rare span { background: #4aa3ff; color: #000; }
+        .card h3 { font-size: 11px; margin: 15px 0 8px 0; width: 100%; color: #fff; }
+        .card span { font-size: 9px; font-weight: bold; padding: 5px 10px; border-radius: 4px; margin-bottom: 12px; }
+        
+        .income { font-size: 13px; font-weight: bold; color: #22c55e; text-shadow: 0 0 8px rgba(34, 197, 94, 0.6); margin: 12px 0; background: rgba(34, 197, 94, 0.1); padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(34, 197, 94, 0.3); }
+        .card p { font-size: 8px; line-height: 1.5; color: #bbb; margin: 8px 0 0 0; text-align: center; width: 100%; border-top: 1px dashed #333; padding-top: 10px; }
 
-        .epic-sec h2 { color: #a335ee; }
-        .epic { border-color: #a335ee; box-shadow: 0 0 10px rgba(163, 53, 238, 0.2); }
-        .epic span { background: #a335ee; color: #fff; }
+        .character-img { width: 110px; height: 110px; object-fit: contain; background: #07070e; border-radius: 8px; padding: 5px; border: 2px solid #222; transition: 0.3s; }
+        .card:hover .character-img { border-color: currentColor; transform: scale(1.05); }
 
-        .legendary-sec h2 { color: #ff8000; }
-        .legendary { border-color: #ff8000; box-shadow: 0 0 15px rgba(255, 128, 0, 0.3); }
-        .legendary span { background: #ff8000; color: #000; }
+        .rare-sec h2 { color: #00d2ff; text-shadow: 0 0 10px #00d2ff; }
+        .rare { border-color: #00d2ff; box-shadow: inset 0 0 15px rgba(0, 210, 255, 0.1), 0 5px 15px rgba(0, 210, 255, 0.1); }
+        .rare:hover { box-shadow: 0 0 25px rgba(0, 210, 255, 0.6); }
+        .rare span { background: #00d2ff; color: #000; box-shadow: 0 0 8px #00d2ff; }
 
-        footer { background: #000; padding: 40px; border-top: 2px solid #333; font-size: 9px; color: #444; }
+        .epic-sec h2 { color: #b537ff; text-shadow: 0 0 10px #b537ff; }
+        .epic { border-color: #b537ff; box-shadow: inset 0 0 15px rgba(181, 55, 255, 0.1), 0 5px 15px rgba(181, 55, 255, 0.1); }
+        .epic:hover { box-shadow: 0 0 25px rgba(181, 55, 255, 0.6); }
+        .epic span { background: #b537ff; color: #fff; box-shadow: 0 0 8px #b537ff; }
+
+        .legendary-sec h2 { color: #ffb300; text-shadow: 0 0 10px #ffb300; }
+        .legendary { border-color: #ffb300; box-shadow: inset 0 0 15px rgba(255, 179, 0, 0.1), 0 5px 15px rgba(255, 179, 0, 0.1); }
+        .legendary:hover { box-shadow: 0 0 25px rgba(255, 179, 0, 0.6); }
+        .legendary span { background: #ffb300; color: #000; box-shadow: 0 0 8px #ffb300; }
+
+        footer { background: #07070e; padding: 40px; border-top: 3px solid #ff0055; font-size: 8px; color: #666; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1 class="rainbow-text">BRAINROT</h1>
+        <h1 class="rainbow-text">STEAL A BRAINROT</h1>
     </header>
+
+    <div class="intro-box">
+        <h2>STATISTIKY POSTAV</h2>
+        <p>Rychlý přehled příjmů a krátké info o každém Brainrotovi.</p>
+    </div>
 
     <nav>
         <a href="#rare">RARE</a>
@@ -56,70 +74,88 @@
     </nav>
 
     <section id="rare" class="rare-sec">
-        <h2>Rare Characters</h2>
+        <h2>Rare Postavy</h2>
         <div class="game-grid">
             <div class="card rare">
                 <img src="Cacto Hipopotamo RARE.png" class="character-img">
                 <span>RARE</span>
                 <h3>Cacto Hipopotamo</h3>
+                <div class="income">+$150/sek</div>
+                <p>Levný a padá často. Ideální na rychlé zaplnění prvních slotů v bázi.</p>
             </div>
             <div class="card rare">
                 <img src="Trippi Troppi RARE.png" class="character-img">
                 <span>RARE</span>
                 <h3>Trippi Troppi</h3>
+                <div class="income">+$180/sek</div>
+                <p>Základní postava. Nikdo ti ji nebude chtít ukrást, zlodějům nestojí za námahu.</p>
             </div>
             <div class="card rare">
                 <img src="Cappuccino Assassino RARE.png" class="character-img">
                 <span>RARE</span>
                 <h3>Cappuccino Assassino</h3>
+                <div class="income">+$250/sek</div>
+                <p>Nejlepší Rare karta. Skvělá pro rychlý start hned po rebyrthu.</p>
             </div>
         </div>
     </section>
 
     <section id="epic" class="epic-sec">
-        <h2>Epic Characters</h2>
+        <h2>Epic Postavy</h2>
         <div class="game-grid">
             <div class="card epic">
                 <img src="Ti Ti Ti Sahur EPIC.png" class="character-img">
                 <span>EPIC</span>
                 <h3>Ti Ti Ti Sahur</h3>
+                <div class="income">+$750/sek</div>
+                <p>Slušný boost ekonomiky. Na pásu po něm skočí skoro každý.</p>
             </div>
             <div class="card epic">
                 <img src="Mummio Rappitto EPIC.png" class="character-img">
                 <span>EPIC</span>
                 <h3>Mummio Rappitto</h3>
+                <div class="income">+$900/sek</div>
+                <p>Dává dobré prachy. Než ho položíš, raději zapni lasery v základně.</p>
             </div>
             <div class="card epic">
                 <img src="Bandito Bobritto EPIC.png" class="character-img">
                 <span>EPIC</span>
                 <h3>Bandito Bobritto</h3>
+                <div class="income">+$1,200/sek</div>
+                <p>Top Epika. S ním rychle našetříš na otevření druhého patra tycoonu.</p>
             </div>
         </div>
     </section>
 
     <section id="legendary" class="legendary-sec">
-        <h2>Legendary Characters</h2>
+        <h2>Legendary Postavy</h2>
         <div class="game-grid">
             <div class="card legendary">
                 <img src="Quackula LEGENDARY.png" class="character-img">
                 <span>LEGENDARY</span>
                 <h3>Quackula</h3>
+                <div class="income">+$5,000/sek</div>
+                <p>Dává obří balík cash. Hlavní cíl pro zloděje z celého serveru.</p>
             </div>
             <div class="card legendary">
                 <img src="Ballerina Cappuccina LEGENDARY.png" class="character-img">
                 <span>LEGENDARY</span>
                 <h3>Ballerina Cappuccina</h3>
+                <div class="income">+$6,500/sek</div>
+                <p>Vzácný úlovek z pásu. Vyžaduje hodně štěstí nebo upgrady konvejeru.</p>
             </div>
             <div class="card legendary">
                 <img src="Clickerino Crabo LEGENDARY.png" class="character-img">
                 <span>LEGENDARY</span>
                 <h3>Clickerino Crabo</h3>
+                <div class="income">+$10,000/sek</div>
+                <p>Nejvzácnější krab. Pokud jich máš víc, držíš top místa v Leaderboardu.</p>
             </div>
         </div>
     </section>
 
     <footer>
-        <p></p>
+        <p>NA PROJEKTU PRACOVALI MATIIUK DANIIL ANTON TKACHOV MATĚJ DOLEŽAL JAKUB TATÍČEK  </p>
     </footer>
 
 </body>
