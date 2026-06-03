@@ -3,159 +3,468 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Steal a Brainrot - Postavy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Steal a Brainrot - Kompletní Průvodce</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { margin: 0; background: #0a0a12; color: #fff; font-family: 'Press Start 2P', cursive; text-align: center; scroll-behavior: smooth; }
+        body { 
+            margin: 0; 
+            background-color: #040408;
+            background-image: 
+                radial-gradient(circle at 50% 35%, #211a59 0%, #0c0a1a 45%, #040408 80%),
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 35px 35px, 35px 35px;
+            background-attachment: fixed;
+            color: #fff; 
+            font-family: 'Orbitron', sans-serif; 
+            text-align: center; 
+            letter-spacing: 1px; 
+        }
         
-        header { background: linear-gradient(180deg, #18182c 0%, #0a0a12 100%); padding: 50px 10px; border-bottom: 4px solid #ff0055; box-shadow: 0 5px 25px rgba(255, 0, 85, 0.4); }
-        .rainbow-text { font-size: 26px; font-weight: bold; text-transform: uppercase; background: linear-gradient(to right, #ff0055, #00d2ff, #b537ff, #ffb300, #ff0055); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s linear infinite; }
-        .rainbow-text1 { font-size: 10px; font-weight: bold; text-transform: uppercase; background: linear-gradient(to right, #ff0055, #00d2ff, #b537ff, #ffb300, #ff0055); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s linear infinite; }
+        .tab-input { display: none; }
+
+        header { background: linear-gradient(180deg, rgba(24, 24, 44, 0.7) 0%, transparent 100%); padding: 50px 10px; border-bottom: 4px solid transparent; border-image: linear-gradient(to right, transparent, #ff0055, #b537ff, #ff0055, transparent) 1; box-shadow: 0 5px 25px rgba(255, 0, 85, 0.3); }
+        
+        .rainbow-text { font-size: 36px; font-weight: 900; text-transform: uppercase; color: #ffb300; text-shadow: 0 0 15px rgba(255, 179, 0, 0.6); }
+        
+        .rainbow-text1 { font-size: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; background: linear-gradient(to right, #ff0055, #00d2ff, #b537ff, #ffb300, #ff0055); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s linear infinite; text-shadow: 0 0 10px rgba(255, 0, 85, 0.2); }
         @keyframes shine { to { background-position: 200% center; } }
         
-        .intro-box { background: #131326; max-width: 800px; margin: 30px auto; padding: 25px; border: 3px solid #ff0055; box-shadow: 0 0 20px rgba(255, 0, 85, 0.2); border-radius: 8px; }
-        .intro-box h2 { font-size: 12px; color: #ff0055; margin-top: 0; margin-bottom: 15px; }
-        .intro-box p { font-size: 9px; line-height: 1.6; color: #00ffcc; margin-bottom: 0; }
-
-        nav { background: #0f0f1d; padding: 15px; position: sticky; top: 0; z-index: 100; border-bottom: 3px solid #333; }
-        nav a { color: #fff; text-decoration: none; margin: 0 15px; font-size: 10px; text-shadow: 0 0 5px rgba(255,255,255,0.5); transition: 0.2s; }
-        nav a:hover { color: #ff0055; text-shadow: 0 0 10px #ff0055; }
-
-        section { padding: 50px 20px; max-width: 1200px; margin: 0 auto; }
-        h2 { margin-bottom: 35px; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; }
-
-        .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        nav { background: transparent; padding: 25px 15px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; border-bottom: 4px solid transparent; border-image: linear-gradient(to right, transparent, #ff0055, #b537ff, #ff0055, transparent) 1; box-shadow: 0 10px 25px rgba(181, 55, 255, 0.15); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+        .tab-label { cursor: pointer; color: #fff; font-size: 14px; font-weight: 700; padding: 10px 20px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 6px; transition: 0.2s; background: rgba(255, 255, 255, 0.03); text-shadow: 0 0 5px rgba(255,255,255,0.3); }
+        .tab-label:hover { color: #ff0055; text-shadow: 0 0 10px #ff0055; border-color: #ff0055; background: rgba(255, 0, 85, 0.15); box-shadow: 0 0 15px rgba(255, 0, 85, 0.3); }
         
-        .card { background: #111122; padding: 20px; display: flex; flex-direction: column; align-items: center; border: 4px solid; border-radius: 12px; transition: 0.3s ease-in-out; position: relative; }
-        .card:hover { transform: translateY(-10px); }
+        #tab1:checked ~ nav label[for="tab1"],
+        #tab2:checked ~ nav label[for="tab2"],
+        #tab3:checked ~ nav label[for="tab3"],
+        #tab4:checked ~ nav label[for="tab4"],
+        #tab5:checked ~ nav label[for="tab5"] { color: #00ffcc; border-color: #00ffcc; background: rgba(0, 255, 204, 0.15); text-shadow: 0 0 10px #00ffcc; box-shadow: 0 0 15px rgba(0, 255, 204, 0.2); }
+
+        .tab-content { display: none; padding: 60px 20px; max-width: 1400px; margin: 0 auto; animation: fadeIn 0.4s ease-in-out; }
+        #tab1:checked ~ #o-hre,
+        #tab2:checked ~ #postavy,
+        #tab3:checked ~ #vybaveni,
+        #tab4:checked ~ #top-brainrots,
+        #tab5:checked ~ #top-stats { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h2 { margin-bottom: 15px; font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #00ffcc; text-shadow: 0 0 10px rgba(0, 255, 204, 0.5); }
+        h3.table-title { font-size: 18px; font-weight: 700; color: #ffb300; margin: 40px 0 25px 0; text-transform: uppercase; line-height: 1.5; }
+        .sub { font-size: 14px; color: #ccc; margin-bottom: 40px; text-shadow: 0 0 5px rgba(0,0,0,0.5); }
+
+        .about-box { background: rgba(15, 15, 30, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 45px; border: 3px solid #ff0055; box-shadow: 0 0 25px rgba(255, 0, 85, 0.25); border-radius: 8px; text-align: center; line-height: 1.8; max-width: 900px; margin: 0 auto; }
+        .about-box p { font-size: 19px; color: #ffffff; margin-bottom: 25px; font-family: sans-serif; }
+        .about-box p:last-child { margin-bottom: 0; }
+
+        .rarity-title { font-size: 18px; font-weight: 700; margin: 40px 0 20px 0; text-align: left; padding-left: 10px; border-left: 4px solid currentColor; text-transform: uppercase; }
+        .rare-title { color: #00d2ff; text-shadow: 0 0 8px rgba(0, 210, 255, 0.4); }
+        .epic-title { color: #b537ff; text-shadow: 0 0 8px rgba(181, 55, 255, 0.4); }
+        .legendary-title { color: #ffb300; text-shadow: 0 0 8px rgba(255, 179, 0, 0.4); }
+
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 50px; }
         
-        .card h3 { font-size: 11px; margin: 15px 0 8px 0; width: 100%; color: #fff; }
-        .card span { font-size: 9px; font-weight: bold; padding: 5px 10px; border-radius: 4px; margin-bottom: 12px; }
+        .card { background: rgba(12, 12, 26, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 20px; display: flex; flex-direction: column; align-items: center; border: 4px solid; border-radius: 12px; transition: 0.3s ease-in-out; position: relative; overflow: hidden; height: 260px; justify-content: center; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 0 20px rgba(255,255,255,0.15); }
+        .card h3 { font-size: 16px; font-weight: 700; margin: 15px 0 8px 0; width: 100%; color: #fff; z-index: 2; }
+        .card span { font-size: 12px; font-weight: 900; padding: 5px 12px; border-radius: 4px; margin-bottom: 12px; z-index: 2; }
+        .income { font-size: 16px; font-weight: 700; color: #22c55e; text-shadow: 0 0 8px rgba(34, 197, 94, 0.6); margin: 12px 0; background: rgba(34, 197, 94, 0.15); padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(34, 197, 94, 0.3); z-index: 2; }
+        .character-img { width: 110px; height: 110px; object-fit: contain; background: #07070e; border-radius: 8px; padding: 5px; border: 2px solid #222; z-index: 2; transition: 0.3s; }
         
-        .income { font-size: 13px; font-weight: bold; color: #22c55e; text-shadow: 0 0 8px rgba(34, 197, 94, 0.6); margin: 12px 0; background: rgba(34, 197, 94, 0.1); padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(34, 197, 94, 0.3); }
-        .card p { font-size: 8px; line-height: 1.5; color: #ffffff; margin: 8px 0 0 0; text-align: center; width: 100%; border-top: 1px dashed #333; padding-top: 10px; }
+        .card:hover .character-img { opacity: 0.3; transform: scale(0.9); }
 
-        .character-img { width: 110px; height: 110px; object-fit: contain; background: #07070e; border-radius: 8px; padding: 5px; border: 2px solid #222; transition: 0.3s; }
-        .card:hover .character-img { border-color: currentColor; transform: scale(1.05); }
+        .card-info-overlay { position: absolute; bottom: -100%; left: 0; width: 100%; height: 100%; background: rgba(6, 6, 14, 0.96); display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; transition: 0.3s ease-in-out; z-index: 5; border-top: 2px solid currentColor; }
+        .card:hover .card-info-overlay { bottom: 0; }
+        .card-info-overlay p { font-size: 13px; line-height: 1.6; color: #ffffff; margin: 0; text-align: center; font-family: sans-serif; }
 
-        .rare-sec h2 { color: #00d2ff; text-shadow: 0 0 10px #00d2ff; }
-        .rare { border-color: #00d2ff; box-shadow: inset 0 0 15px rgba(0, 210, 255, 0.1), 0 5px 15px rgba(0, 210, 255, 0.1); }
-        .rare:hover { box-shadow: 0 0 25px rgba(0, 210, 255, 0.6); }
-        .rare span { background: #00d2ff; color: #000; box-shadow: 0 0 8px #00d2ff; }
+        .rare { border-color: #00d2ff; box-shadow: 0 0 10px rgba(0, 210, 255, 0.1); } .rare span { background: #00d2ff; color: #000; } .rare .card-info-overlay { border-color: #00d2ff; }
+        .epic { border-color: #b537ff; box-shadow: 0 0 10px rgba(181, 55, 255, 0.1); } .epic span { background: #b537ff; color: #fff; } .epic .card-info-overlay { border-color: #b537ff; }
+        .legendary { border-color: #ffb300; box-shadow: 0 0 10px rgba(255, 179, 0, 0.1); } .legendary span { background: #ffb300; color: #000; } .legendary .card-info-overlay { border-color: #ffb300; }
 
-        .epic-sec h2 { color: #b537ff; text-shadow: 0 0 10px #b537ff; }
-        .epic { border-color: #b537ff; box-shadow: inset 0 0 15px rgba(181, 55, 255, 0.1), 0 5px 15px rgba(181, 55, 255, 0.1); }
-        .epic:hover { box-shadow: 0 0 25px rgba(181, 55, 255, 0.6); }
-        .epic span { background: #b537ff; color: #fff; box-shadow: 0 0 8px #b537ff; }
+        .gears-container { display: flex; flex-direction: column; gap: 20px; max-width: 1000px; margin: 0 auto; }
+        .gear-row { display: flex; flex-direction: column; background: rgba(12, 12, 26, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 3px solid #00ffcc; border-radius: 12px; padding: 20px; align-items: center; gap: 20px; transition: 0.2s ease-in-out; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+        @media (min-width: 600px) {
+            .gear-row { flex-direction: row; text-align: left; }
+        }
+        .gear-row:hover { border-color: #ff0055; box-shadow: 0 0 20px rgba(255, 0, 85, 0.3); }
+        .gear-img-box { width: 100px; height: 100px; background: #07070e; border-radius: 8px; border: 2px solid #222; display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 5px; }
+        .gear-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .gear-details { flex-grow: 1; }
+        .gear-header-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 15px; margin-bottom: 10px; justify-content: center; }
+        @media (min-width: 600px) {
+            .gear-header-meta { justify-content: flex-start; }
+        }
+        .gear-name { font-size: 18px; font-weight: 900; color: #fff; margin: 0; text-transform: uppercase; }
+        .gear-price { font-size: 14px; font-weight: 700; color: #ffb300; background: rgba(255, 179, 0, 0.15); padding: 4px 12px; border-radius: 4px; border: 1px solid rgba(255, 179, 0, 0.3); }
+        .gear-desc { font-size: 14px; line-height: 1.6; color: #ccc; margin: 0; font-family: sans-serif; }
 
-        .legendary-sec h2 { color: #ffb300; text-shadow: 0 0 10px #ffb300; }
-        .legendary { border-color: #ffb300; box-shadow: inset 0 0 15px rgba(255, 179, 0, 0.1), 0 5px 15px rgba(255, 179, 0, 0.1); }
-        .legendary:hover { box-shadow: 0 0 25px rgba(255, 179, 0, 0.6); }
-        .legendary span { background: #ffb300; color: #000; box-shadow: 0 0 8px #ffb300; }
+        .tables-container { display: flex; flex-direction: column; gap: 50px; max-width: 1300px; margin: 0 auto; }
+        @media (min-width: 1024px) {
+            .tables-container { flex-direction: row; justify-content: space-between; gap: 40px; }
+            .table-wrapper { flex: 1; }
+        }
 
-        footer { background: #07070e; padding: 40px; border-top: 3px solid #ff0055; font-size: 8px; color: #666; }
+        .market-table, .leaderboard-table { width: 100%; border-collapse: collapse; font-size: 14px; background: rgba(12, 12, 26, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 4px solid #ffb300; margin: 0 auto; line-height: 1.6; box-shadow: 0 0 15px rgba(255, 179, 0, 0.15); }
+        .leaderboard-table { border-color: #00ffcc; box-shadow: 0 0 15px rgba(0, 255, 204, 0.15); }
+        .market-table th, .market-table td, .leaderboard-table th, .leaderboard-table td { padding: 25px 15px; text-align: center; border: 2px solid #1a1a2e; }
+        .market-table th { background: rgba(24, 24, 44, 0.8); color: #ffb300; font-size: 15px; font-weight: 700; }
+        .leaderboard-table th { background: rgba(24, 24, 44, 0.8); color: #00ffcc; font-size: 15px; font-weight: 700; }
+        .market-table tr:hover, .leaderboard-table tr:hover { background: rgba(22, 22, 51, 0.5); }
+        
+        .amount-badge { color: #00d2ff; font-weight: bold; }
+        .money-text { color: #ffb300; text-shadow: 0 0 8px rgba(255, 179, 0, 0.6); font-weight: bold; }
+        .steal-text { color: #ff0055; text-shadow: 0 0 8px rgba(255, 0, 85, 0.6); font-weight: bold; }
+        
+        .btn-market { display: inline-block; padding: 10px 14px; background: #ff0055; color: white; text-decoration: none; font-size: 11px; font-weight: 700; border-radius: 4px; border: 2px solid #fff; transition: 0.2s; box-shadow: 0 0 5px #ff0055; }
+        .btn-market:hover { background: #fff; color: #ff0055; box-shadow: 0 0 15px #fff; }
+
+        footer { background: transparent; padding: 60px 20px; margin-top: 120px; border-top: 4px solid transparent; border-image: linear-gradient(to right, transparent, #ff0055, #b537ff, #ff0055, transparent) 1; box-shadow: 0 -5px 25px rgba(255, 0, 85, 0.3); }
     </style>
 </head>
 <body>
+
+    <input type="radio" name="tabs" id="tab1" class="tab-input" checked>
+    <input type="radio" name="tabs" id="tab2" class="tab-input">
+    <input type="radio" name="tabs" id="tab3" class="tab-input">
+    <input type="radio" name="tabs" id="tab4" class="tab-input">
+    <input type="radio" name="tabs" id="tab5" class="tab-input">
 
     <header>
         <h1 class="rainbow-text">STEAL A BRAINROT</h1>
     </header>
 
-    <div class="intro-box">
-        <h2>STATISTIKY POSTAV</h2>
-        <p>Rychlý přehled příjmů a krátké info o každém Brainrotovi.</p>
-    </div>
-
     <nav>
-        <a href="#rare">RARE</a>
-        <a href="#epic">EPIC</a>
-        <a href="#legendary">LEGENDARY</a>
+        <label for="tab1" class="tab-label">O HŘE</label>
+        <label for="tab2" class="tab-label">POSTAVY</label>
+        <label for="tab3" class="tab-label">VYBAVENÍ</label>
+        <label for="tab4" class="tab-label">TOP CENNÍ BRAINROTI</label>
+        <label for="tab5" class="tab-label">TOP BOHÁČI / ZLODĚJI</label>
     </nav>
 
-    <section id="rare" class="rare-sec">
-        <h2>Rare Postavy</h2>
+    <div id="o-hre" class="tab-content">
+        <h2>O této hře</h2>
+        <div class="about-box">
+            <p>Ve hře Steal a Brainrot je cílem hráčů získávat „Brainroty“ – voxelové postavičky založené na internetovém fenoménu italského brainrotu z roku 2025 – a hromadit jmění. Každý hráč začíná s vlastní základnou pro ukládání svých Brainrotů a malým množstvím měny.</p>
+            <p>Mapu rozděluje na dvě poloviny běžící pás, kde si hráči mohou kupovat další Brainroty, kteří jim postupem času pasivně generují příjem. Hráči postupují hrou tak, že si z pásu pořizují vzácnější a dražší kousky, případně je kradou ostatním.</p>
+            <p>Tento herní princip se dá přirovnat ke sportovní hře Capture the Flag (přetahovaná o vlajku). Na obranu před pokusy o krádež má každá základna tlačítko, které dokáže aktivovat dočasný ochranný štít.</p>
+        </div>
+    </div>
+
+    <div id="postavy" class="tab-content">
+        <h2>Přehled všech postav</h2>
+        <p class="sub">Najďte kurzorem na kartu postavy pro zobrazení bližších informací.</p>
+        
+        <div class="rarity-title rare-title">Rare Postavy</div>
         <div class="game-grid">
             <div class="card rare">
                 <img src="Cacto Hipopotamo RARE.png" class="character-img">
                 <span>RARE</span>
                 <h3>Cacto Hipopotamo</h3>
                 <div class="income">+$150/sek</div>
-                <p>Levný a padá často. Ideální na rychlé zaplnění prvních slotů v bázi.</p>
+                <div class="card-info-overlay"><p>Levný a padá často. Ideální na rychlé zaplnění prvních slots v bázi.</p></div>
             </div>
             <div class="card rare">
                 <img src="Trippi Troppi RARE.png" class="character-img">
                 <span>RARE</span>
                 <h3>Trippi Troppi</h3>
                 <div class="income">+$180/sek</div>
-                <p>Základní postava. Nikdo ti ji nebude chtít ukrást, zlodějům nestojí za námahu.</p>
+                <div class="card-info-overlay"><p>Základní postava. Nikdo ti ji nebude chtít ukrást, zlodějům nestojí za námahu.</p></div>
             </div>
             <div class="card rare">
                 <img src="Cappuccino Assassino RARE.png" class="character-img">
                 <span>RARE</span>
                 <h3>Cappuccino Assassino</h3>
                 <div class="income">+$250/sek</div>
-                <p>Nejlepší Rare karta. Skvělá pro rychlý start hned po rebyrthu.</p>
+                <div class="card-info-overlay"><p>Nejlepší Rare karta. Skvělá pro rychlý start hned po rebyrthu.</p></div>
             </div>
         </div>
-    </section>
 
-    <section id="epic" class="epic-sec">
-        <h2>Epic Postavy</h2>
+        <div class="rarity-title epic-title">Epic Postavy</div>
         <div class="game-grid">
             <div class="card epic">
                 <img src="Ti Ti Ti Sahur EPIC.png" class="character-img">
                 <span>EPIC</span>
                 <h3>Ti Ti Ti Sahur</h3>
                 <div class="income">+$750/sek</div>
-                <p>Slušný boost ekonomiky. Na pásu po něm skočí skoro každý.</p>
+                <div class="card-info-overlay"><p>Slušný boost ekonomiky. Na pásu po něm skočí skoro každý.</p></div>
             </div>
             <div class="card epic">
                 <img src="Mummio Rappitto EPIC.png" class="character-img">
                 <span>EPIC</span>
                 <h3>Mummio Rappitto</h3>
                 <div class="income">+$900/sek</div>
-                <p>Dává dobré prachy. Než ho položíš, raději zapni lasery v základně.</p>
+                <div class="card-info-overlay"><p>Dává dobré prachy. Než ho položíš, raději zapni lasery v základně.</p></div>
             </div>
             <div class="card epic">
                 <img src="Bandito Bobritto EPIC.png" class="character-img">
                 <span>EPIC</span>
                 <h3>Bandito Bobritto</h3>
                 <div class="income">+$1,200/sek</div>
-                <p>Top Epika. S ním rychle našetříš na otevření druhého patra tycoonu.</p>
+                <div class="card-info-overlay"><p>Top Epika. S ním rychle našetříš na otevření druhého patra tycoonu.</p></div>
             </div>
         </div>
-    </section>
 
-    <section id="legendary" class="legendary-sec">
-        <h2>Legendary Postavy</h2>
+        <div class="rarity-title legendary-title">Legendary Postavy</div>
         <div class="game-grid">
             <div class="card legendary">
                 <img src="Quackula LEGENDARY.png" class="character-img">
                 <span>LEGENDARY</span>
                 <h3>Quackula</h3>
                 <div class="income">+$5,000/sek</div>
-                <p>Dává obří balík cash. Hlavní cíl pro zloděje z celého serveru.</p>
+                <div class="card-info-overlay"><p>Dává obří balík cash. Hlavní cíl pro zloděje z celého serveru.</p></div>
             </div>
             <div class="card legendary">
                 <img src="Ballerina Cappuccina LEGENDARY.png" class="character-img">
-                <span>LEGENDARY</span>
-                <h3>Ballerina Cappuccina</h3>
+                <span>Ballerina Cappuccina</span>
                 <div class="income">+$6,500/sek</div>
-                <p>Vzácný úlovek z pásu. Vyžaduje hodně štěstí nebo upgrady konvejeru.</p>
+                <div class="card-info-overlay"><p>Vzácný úlovek z pásu. Vyžaduje hodně štěstí nebo upgrady konvejeru.</p></div>
             </div>
             <div class="card legendary">
                 <img src="Clickerino Crabo LEGENDARY.png" class="character-img">
                 <span>LEGENDARY</span>
                 <h3>Clickerino Crabo</h3>
                 <div class="income">+$10,000/sek</div>
-                <p>Nejvzácnější krab. Pokud jich máš víc, držíš top místa v Leaderboardu.</p>
+                <div class="card-info-overlay"><p>Nejvzácnější krab. Pokud jich máš víc, držíš top místa v Leaderboardu.</p></div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <div id="vybaveni" class="tab-content">
+        <h2>Přehled herního vybavení</h2>
+        <p class="sub">Seznam předmětů a zbraní seřazený vzestupně od nejlevnějšího po nejdražší.</p>
+        
+        <div class="gears-container">
+            <div class="gear-row">
+                <div class="gear-img-box"><img src="Slap_Glove.png" alt="Slap"></div>
+                <div class="gear-details">
+                    <div class="gear-header-meta">
+                        <h3 class="gear-name">Slap</h3>
+                        <span class="gear-price">$500</span>
+                    </div>
+                    <p class="gear-desc">Silnější alternativa pálky s delším dosahem. Umožňuje fackovat zloděje a vracet vaše "brainrots".</p>
+                </div>
+            </div>
+
+            <div class="gear-row">
+                <div class="gear-img-box"><img src="Trap.png" alt="Trap"></div>
+                <div class="gear-details">
+                    <div class="gear-header-meta">
+                        <h3 class="gear-name">Trap</h3>
+                        <span class="gear-price">$1,000</span>
+                    </div>
+                    <p class="gear-desc">Pozemní past. Po aktivaci zmrazí zloděje na 7 sekund. Na mapě můžete mít maximálně 5 pastí najednou.</p>
+                </div>
+            </div>
+
+            <div class="gear-row">
+                <div class="gear-img-box"><img src="Bee_Launcher.png" alt="Bee Launcher"></div>
+                <div class="gear-details">
+                    <div class="gear-header-meta">
+                        <h3 class="gear-name">Bee Launcher</h3>
+                        <span class="gear-price">$10,000</span>
+                    </div>
+                    <p class="gear-desc">Vypustí včely, které na 5 sekund invertují ovládání nepřítele, přiblíží FOV a zbarví obrazovku do žluta.</p>
+                </div>
+            </div>
+
+            <div class="gear-row">
+                <div class="gear-img-box"><img src="Grapple_Hook.png" alt="Grapple Gun"></div>
+                <div class="gear-details">
+                    <div class="gear-header-meta">
+                        <h3 class="gear-name">Grapple Gun</h3>
+                        <span class="gear-price">$75,000</span>
+                    </div>
+                    <p class="gear-desc">Vystřelí hák a okamžitě vás přitáhne k zasaženému objektu, což výrazně zrychluje pohyb.</p>
+                </div>
+            </div>
+
+            <div class="gear-row">
+                <div class="gear-img-box"><img src="Taser_Gun.png" alt="Taser"></div>
+                <div class="gear-details">
+                    <div class="gear-header-meta">
+                        <h3 class="gear-name">Taser</h3>
+                        <span class="gear-price">$100,000</span>
+                    </div>
+                    <p class="gear-desc">Distanční zbraň, která při zásahu srazí nepřítele k zemi (ragdoll efekt) na 3 sekundy.</p>
+                </div>
+            </div>
+
+            <div class="gear-row">
+                <div class="gear-img-box"><img src="Medusa 27s_Head.png" alt="Medusa’s Head"></div>
+                <div class="gear-details">
+                    <div class="gear-header-meta">
+                        <h3 class="gear-name">Medusa’s Head</h3>
+                        <span class="gear-price">$5,000,000</span>
+                    </div>
+                    <p class="gear-desc">Promění všechny nepřátele v dosahu na 3 sekundy v kámen (znehybní je), poté spadnou do ragdollu.</p>
+                </div>
+            </div>
+
+            <div class="gear-row">
+                <div class="gear-img-box"><img src="All_Seeing_Sentry.png" alt="All-Seeing Sentry"></div>
+                <div class="gear-details">
+                    <div class="gear-header-meta">
+                        <h3 class="gear-name">All-Seeing Sentry</h3>
+                        <span class="gear-price">$5,000,000</span>
+                    </div>
+                    <p class="gear-desc">Automatická střílna. Po 5 sekundách přípravy automaticky střílí na hráče (i skrz zdi nebo neviditelné) po dobu 1 minuty.</p>
+                </div>
+            </div>
+
+            <div class="gear-row">
+                <div class="gear-img-box"><img src="Subspace_Mine.png" alt="Subspace Mine"></div>
+                <div class="gear-details">
+                    <div class="gear-header-meta">
+                        <h3 class="gear-name">Subspace Mine</h3>
+                        <span class="gear-price">$500,000,000</span>
+                    </div>
+                    <p class="gear-desc">Neviditelná mina. Výbuch donutí nepřítele upustit předmět z ruky a hodí ho do ragdollu na 9 sekund s fialovou aurou.</p>
+                </div>
+            </div>
+
+            <div class="gear-row">
+                <div class="gear-img-box"><img src="Giant_potion.png" alt="Giant Potion"></div>
+                <div class="gear-details">
+                    <div class="gear-header-meta">
+                        <h3 class="gear-name">Giant Potion</h3>
+                        <span class="gear-price">$1,500,000,000</span>
+                    </div>
+                    <p class="gear-desc">Vypitím lektvaru zvětšíte sebe i své předměty 4x na dobu 20 sekund. Získáte imunitu vůči ragdollu a vyšší skok.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="top-brainrots" class="tab-content">
+        <h2>Top nejcennější Brainroti</h2>
+        <p class="sub">Seznam limitovaných voxelových postaviček a přímé odkazy na Eldorado tržiště.</p>
+        
+        <table class="market-table">
+            <thead>
+                <tr>
+                    <th>Název postavy</th>
+                    <th>Existující počet kusů</th>
+                    <th>Odkaz ke koupi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Globa Steppa</td>
+                    <td class="amount-badge">~122</td>
+                    <td><a href="https://www.eldorado.gg/steal-a-brainrot-brainrots/i/259?searchQuery=Globa%20Steppa" target="_blank" class="btn-market">Check market availability</a></td>
+                </tr>
+                <tr>
+                    <td>Arcadragon</td>
+                    <td class="amount-badge">70+</td>
+                    <td><a href="https://www.eldorado.gg/steal-a-brainrot-brainrots/i/259?searchQuery=Arcadragon" target="_blank" class="btn-market">Check market availability</a></td>
+                </tr>
+                <tr>
+                    <td>Spyder Elephant 🆕</td>
+                    <td class="amount-badge">25 (fixed)</td>
+                    <td><a href="https://www.eldorado.gg/steal-a-brainrot-brainrots/i/259?searchQuery=Spyder%20Elephant" target="_blank" class="btn-market">Check market availability</a></td>
+                </tr>
+                <tr>
+                    <td>Lazy Ducky</td>
+                    <td class="amount-badge">4+</td>
+                    <td><a href="https://www.eldorado.gg/steal-a-brainrot-brainrots/i/259?searchQuery=Lazy%20Ducky" target="_blank" class="btn-market">Check market availability</a></td>
+                </tr>
+                <tr>
+                    <td>Rico Dinero</td>
+                    <td class="amount-badge">1+</td>
+                    <td><a href="https://www.eldorado.gg/steal-a-brainrot-brainrots/i/259?searchQuery=Rico%20Dinero" target="_blank" class="btn-market">Check market availability</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="top-stats" class="tab-content">
+        <h2>Herní Žebříčky</h2>
+        <p class="sub">Aktuální globální statistiky nejlepších hráčů ze serveru.</p>
+        
+        <div class="tables-container">
+            <div class="table-wrapper">
+                <h3 class="table-title">TOP BOHÁČI<br>(Top Earners)</h3>
+                <table class="leaderboard-table" style="border-color: #ffb300;">
+                    <thead>
+                        <tr>
+                            <th>Pozice</th>
+                            <th>Jméno</th>
+                            <th>Příjem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: #ffb300;">🥇 1.</td>
+                            <td style="color: #ffb300;">Neofire 🇺🇸</td>
+                            <td class="money-text">10.6T/s</td>
+                        </tr>
+                        <tr>
+                            <td style="color: #00d2ff;">🥈 2.</td>
+                            <td>LeFrenchTacos 🇮🇹</td>
+                            <td class="money-text">10.24T/s</td>
+                        </tr>
+                        <tr>
+                            <td style="color: #b537ff;">🥉 3.</td>
+                            <td style="color: #b537ff;">CoolSABDad 🇺🇸</td>
+                            <td class="money-text">10.12T/s</td>
+                        </tr>
+                        <tr>
+                            <td>4.</td>
+                            <td>LuanClashWar 🇧🇷</td>
+                            <td class="money-text">8.61T/s</td>
+                        </tr>
+                        <tr>
+                            <td>5.</td>
+                            <td>TheCohenXTamarL</td>
+                            <td class="money-text">8.3T/s</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-wrapper">
+                <h3 class="table-title">TOP ZLODĚJI<br>(Top Steals)</h3>
+                <table class="leaderboard-table" style="border-color: #ff0055;">
+                    <thead>
+                        <tr>
+                            <th>Pozice</th>
+                            <th>Jméno</th>
+                            <th>Krádeže</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: #ffb300;">🥇 1.</td>
+                            <td style="color: #ffb300;">Jeyrky_Nguyen</td>
+                            <td class="steal-text">172.6K</td>
+                        </tr>
+                        <tr>
+                            <td style="color: #00d2ff;">🥈 2.</td>
+                            <td>miemei</td>
+                            <td class="steal-text">135.6K</td>
+                        </tr>
+                        <tr>
+                            <td style="color: #b537ff;">🥉 3.</td>
+                            <td style="color: #b537ff;">DestroyerGatito</td>
+                            <td class="steal-text">102.18K</td>
+                        </tr>
+                        <tr>
+                            <td>4.</td>
+                            <td>GELADO</td>
+                            <td class="steal-text">92.36K</td>
+                        </tr>
+                        <tr>
+                            <td>5.</td>
+                            <td>YiYi</td>
+                            <td class="steal-text">71.41K</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <footer>
-        <p class="rainbow-text1"> NA PROJEKTU PRACOVALI MATIIUK DANIIL ANTON TKACHOV MATĚJ DOLEŽAL JAKUB TATÍČEK  </p>
+        <p class="rainbow-text1">NA PROJEKTU PRACOVALI MATIIUK DANIIL ANTON TKACHOV MATĚJ DOLEŽAL JAKUB TATÍČEK</p>
     </footer>
 
 </body>
